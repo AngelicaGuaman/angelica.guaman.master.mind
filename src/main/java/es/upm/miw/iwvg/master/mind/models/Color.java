@@ -8,13 +8,13 @@ public enum Color {
     WHITE('B'),
     BLACK('N');
 
-    private char code;
+    private char value;
 
-    private Color(char code) {
-        this.code = code;
+    private Color(char value) {
+        this.value = value;
     }
 
-    public char getCode() {
-        return code;
+    public char getValue() {
+        return value;
     }
 }
