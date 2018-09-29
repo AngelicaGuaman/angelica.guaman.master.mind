@@ -2,71 +2,55 @@ package es.upm.miw.iwvg.master.mind;
 
 import es.upm.miw.iwvg.master.mind.utils.IO;
 
-import java.util.Random;
-
 public class MasterMind {
+
+    static final int ATTEMPT = 10;
+    static final int MAX_LONG_SECRET_CODE = 4;
 
     public static void main(String[] args) {
 
-        char[] secretCode = new char[4];
-
-
         IO io = new IO();
 
-        String maquina = "ARRR";
-
         int i = 1;
-
-        char[] clave = generarClave();
-
+        char[] codeMachine = generarClave();
+        io.writeArrayChar(codeMachine);
         do {
 
             System.out.println("TURNO " + i);
 
-            //String secret = io.readString("Intento? [cuatro letras de entre A-amarillo, R-rojo, V-verde, Z-azul,\n" +"B-blanco, N-negro]: ");
+            String codeUser = io.readString("Intento? [cuatro letras de entre A-amarillo, R-rojo, V-verde, Z-azul,\n" +"B-blanco, N-negro]: ");
+            io.writeln(codeUser);
 
-            //io.writeln(secret);
-
-
-            char[] clave2 = new char[]{'A', 'R', 'R', 'R'};
-
-            io.writeArrayChar(clave);
-            io.writeArrayChar(clave2);
-
-            int nmuertos = muertos(clave, clave2);
+            int nmuertos = guess(codeUser.toCharArray(), codeMachine);
             System.out.println("Muertos; " + nmuertos);
             // int nheridos = heridos(clave, clave2);
             //System.out.println("Heridos: " + nheridos);
 
             ++i;
-        } while ((i <= 10));
+        } while ((i <= ATTEMPT));
 
     }
 
-    public static int muertos(char[] clave1, char[] clave2) {
-        int a = 0;
+    public static int guess(char[] codeUser, char[] codeMachine) {
+        int numGuess = 0;
 
-        for (int i = 0; i < 4; i++) {
-            char c2 = clave2[i];
-            char c1 = clave1[i];
-
-            if (c1 == c2) {
-                a++;
+        for (int i = 0; i < MAX_LONG_SECRET_CODE; i++) {
+            if (codeUser[i] == codeMachine[i]) {
+                numGuess++;
             }
         }
-        return a;
+        return numGuess;
     }
 
     public static char[] generarClave() {
-        char[] posiblesClaves = new char[]{'A', 'R', 'V', 'Z'};
-        Random rnd = new Random();
-        char[] clave = new char[4];
-        int numeroRandom;
-        for (int i = 0; i < clave.length; i++) {
-            numeroRandom = (int) (Math.random() * posiblesClaves.length);
-            clave[i] = posiblesClaves[numeroRandom];
+        char[] possibleCode = new char[]{'A', 'R', 'V', 'Z'};
+        char[] secretCode = new char[MAX_LONG_SECRET_CODE];
+
+        for (int i = 0; i < MAX_LONG_SECRET_CODE; i++) {
+            int random = (int) (Math.random() * possibleCode.length);
+            secretCode[i] = possibleCode[random];
         }
-        return clave;
+        return secretCode;
     }
 
 }
