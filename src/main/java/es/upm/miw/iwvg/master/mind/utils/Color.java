@@ -17,4 +17,8 @@ public enum Color {
     public char getValue() {
         return value;
     }
+
+    public static Color random() {
+        return values()[(int) (Math.random() * Color.values().length)];
+    }
 }

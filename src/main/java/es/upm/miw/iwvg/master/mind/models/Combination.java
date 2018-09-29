@@ -8,7 +8,7 @@ import java.util.List;
 public class Combination {
     private List<Color> colorList = new ArrayList<>();
 
-    private Combination(List<Color> colorList) {
+    public Combination(List<Color> colorList) {
         this.colorList = new ArrayList<>(colorList);
     }
 

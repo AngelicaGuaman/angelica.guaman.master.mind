@@ -6,9 +6,9 @@ import es.upm.miw.iwvg.master.mind.utils.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RandomColorCombination extends ColorCombinationController {
+public class RandomSecretColorCombination extends ColorCombinationController {
 
-    public RandomColorCombination(int dimension){
+    public RandomSecretColorCombination(int dimension) {
         super(dimension);
     }
 
@@ -16,7 +16,7 @@ public class RandomColorCombination extends ColorCombinationController {
     public Combination generateCombinationColor() {
         List<Color> colorList = new ArrayList<>();
 
-        for(int i = 0; i < this.getDimesion(); i++){
+        for (int i = 0; i < this.getDimesion(); i++) {
             colorList.add(Color.random());
         }
 
