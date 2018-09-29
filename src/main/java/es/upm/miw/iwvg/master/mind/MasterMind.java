@@ -1,5 +1,6 @@
 package es.upm.miw.iwvg.master.mind;
 
+import es.upm.miw.iwvg.master.mind.models.Color;
 import es.upm.miw.iwvg.master.mind.utils.IO;
 
 public class MasterMind {
@@ -12,7 +13,7 @@ public class MasterMind {
         IO io = new IO();
 
         int i = 1;
-        char[] codeMachine = generarClave();
+        char[] codeMachine = generateCode();
         io.writeArrayChar(codeMachine);
         do {
 
@@ -21,8 +22,8 @@ public class MasterMind {
             String codeUser = io.readString("Intento? [cuatro letras de entre A-amarillo, R-rojo, V-verde, Z-azul,\n" +"B-blanco, N-negro]: ");
             io.writeln(codeUser);
 
-            int nmuertos = guess(codeUser.toCharArray(), codeMachine);
-            System.out.println("Muertos; " + nmuertos);
+            int numGuess = guess(codeUser.toCharArray(), codeMachine);
+            System.out.println("Muertos; " + numGuess);
             // int nheridos = heridos(clave, clave2);
             //System.out.println("Heridos: " + nheridos);
 
@@ -42,12 +43,23 @@ public class MasterMind {
         return numGuess;
     }
 
-    public static char[] generarClave() {
+    public static int guessa(char[] codeUser, char[] codeMachine) {
+        int numGuess = 0;
+
+        for (int i = 0; i < MAX_LONG_SECRET_CODE; i++) {
+            if (codeUser[i] == codeMachine[i]) {
+                numGuess++;
+            }
+        }
+        return numGuess;
+    }
+
+    public static char[] generateCode() {
         char[] possibleCode = new char[]{'A', 'R', 'V', 'Z'};
         char[] secretCode = new char[MAX_LONG_SECRET_CODE];
 
         for (int i = 0; i < MAX_LONG_SECRET_CODE; i++) {
-            int random = (int) (Math.random() * possibleCode.length);
+            int random = (int) (Math.random() * Color.values().length);
             secretCode[i] = possibleCode[random];
         }
         return secretCode;
