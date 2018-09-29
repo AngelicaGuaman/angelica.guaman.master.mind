@@ -1,6 +1,6 @@
 package es.upm.miw.iwvg.master.mind;
 
-import es.upm.miw.iwvg.master.mind.models.Color;
+import es.upm.miw.iwvg.master.mind.utils.Color;
 import es.upm.miw.iwvg.master.mind.utils.IO;
 
 public class MasterMind {

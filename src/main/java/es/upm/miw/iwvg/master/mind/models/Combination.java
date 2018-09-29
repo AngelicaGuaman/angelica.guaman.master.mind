@@ -1,5 +1,7 @@
 package es.upm.miw.iwvg.master.mind.models;
 
+import es.upm.miw.iwvg.master.mind.utils.Color;
+
 import java.util.ArrayList;
 import java.util.List;
 

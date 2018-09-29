@@ -1,4 +1,4 @@
-package es.upm.miw.iwvg.master.mind.models;
+package es.upm.miw.iwvg.master.mind.utils;
 
 public enum Message {
     GAME_USER("1. Partida"),
