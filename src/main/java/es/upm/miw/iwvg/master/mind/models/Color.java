@@ -13,4 +13,8 @@ public enum Color {
     private Color(char code) {
         this.code = code;
     }
+
+    public char getCode() {
+        return code;
+    }
 }
