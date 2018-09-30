@@ -13,6 +13,8 @@ public class GameController {
 
     private ContinueController continueController;
 
+    private MenuController menuController;
+
     private IO io;
 
     private int dimension;
@@ -21,8 +23,6 @@ public class GameController {
 
     private static final int ATTEMPT = 10;
 
-    private static final int NUMBER_PLAY_MODE = 2;
-
     public GameController(int dimension, IO io) {
         assert dimension > 0;
         assert io != null;
@@ -30,33 +30,33 @@ public class GameController {
         this.dimension = dimension;
         this.io = io;
         this.players = new PlayerController[NUM_PLAYERS];
-
+        this.boardController = new BoardController(dimension, io);
+        menuController = new MenuController();
     }
 
     public void play() {
-        int playMode = getMenuOption();
+        int playMode = menuController.getPlayMode();
 
         setPlayers(playMode);
         setContinueController(playMode);
 
-        int i = 0;
+        int i = 1;
         boolean isWinner = false;
 
-        io.writeln("Secreto: ****");
+        io.writeln("\nSecreto: ****");
         Combination secret = players[0].generateColorCombination();
+        //io.writeln(Message.ATTEMPT.getMessage()+combination.toString());
 
         do {
             Combination guess = players[1].generateColorCombination();
 
             CombinationGuess combinationGuess = secret.verifySecretCode(guess);
             isWinner = combinationGuess.isWinner();
+            io.writeln("Código muerto/herido [N-negro, B-blanco]: " + combinationGuess.toString());
 
             if (!isWinner) {
                 i++;
-                //io.writeln();
-                //io.writeln("Código muerto/herido: " + combinationGuess.toString());
                 io.writeln(String.format(Message.RESULT.getMessage(), combinationGuess.getKilled(), combinationGuess.getInjured()));
-                //io.writeln();
             } else {
                 io.writeln(String.format(Message.WINNER.getMessage(), combinationGuess.getKilled()));
             }
@@ -84,29 +84,6 @@ public class GameController {
         if (option == 1) {
             players[1] = new ManualPlayerController(dimension, io);
         }
-    }
-
-    private int getMenuOption() {
-        io.writeln();
-        io.writeln();
-
-        io.writeln(Message.WELCOME.getMessage());
-        io.writeln(Message.GAME_USER.getMessage());
-        io.writeln(Message.GAME_MACHINE.getMessage());
-
-        int option;
-        boolean ok;
-
-        do {
-            option = io.readInt(Message.GAME_OPTION.getMessage());
-            ok = (option > 0) && (option <= NUMBER_PLAY_MODE);
-
-            if (!ok) {
-                io.writeln(Message.GAME_OPTION_ERROR.getMessage());
-            }
-        } while (!ok);
-
-        return option;
     }
 
     public boolean continuePlaying() {

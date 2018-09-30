@@ -2,14 +2,19 @@ package es.upm.miw.iwvg.master.mind.models;
 
 import es.upm.miw.iwvg.master.mind.controllers.ColorCombinationController;
 
+import java.util.ArrayList;
+
 public class Board {
     private Combination secretCode;
     private CombinationGuess combinationGuess;
     private ColorCombinationController colorCombinationController;
+    private int dimension;
 
-    public Board(ColorCombinationController colorCombinationController) {
+    public Board(int dimension, ColorCombinationController colorCombinationController) {
+        assert dimension > 0;
         assert colorCombinationController != null;
 
+        this.dimension = dimension;
         this.colorCombinationController = colorCombinationController;
     }
 
@@ -25,11 +30,15 @@ public class Board {
         return secretCode;
     }
 
-    public void setSecretCode(Combination secretCode) {
+    public void setSecretCode() {
         this.secretCode = this.colorCombinationController.generateColorCombination();
     }
 
-    public CombinationGuess getCombinationGuess() {
-        return combinationGuess;
+    public int getKilled() {
+        return combinationGuess.getKilled();
+    }
+
+    public int getInjured() {
+        return combinationGuess.getInjured();
     }
 }

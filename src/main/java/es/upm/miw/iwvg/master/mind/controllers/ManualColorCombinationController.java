@@ -16,7 +16,7 @@ public class ManualColorCombinationController extends ColorCombinationController
 
     @Override
     public Combination generateColorCombination() {
-        String guessColors = this.getIo().readString(Message.ATTEMPT.getMessage()).toUpperCase();
+        String guessColors = this.getIo().readString("\n"+Message.ATTEMPT.getMessage()).toUpperCase();
         return getColorList(guessColors);
     }
 
@@ -27,7 +27,9 @@ public class ManualColorCombinationController extends ColorCombinationController
 
         for (int i = 0; i < guessColors.length(); i++) {
             SecretColor color = SecretColor.getByValue(guessColors.charAt(i));
-            //TODO Devolver error cuando es null
+            if(color == null){
+                return null;
+            }
             colorList.add(color);
         }
 

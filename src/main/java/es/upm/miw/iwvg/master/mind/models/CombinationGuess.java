@@ -1,13 +1,12 @@
 package es.upm.miw.iwvg.master.mind.models;
 
 import es.upm.miw.iwvg.master.mind.utils.Color;
-import es.upm.miw.iwvg.master.mind.utils.SecretColor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CombinationGuess {
-    private List<Color> colorList = new ArrayList<>();
+    private List<Color> colorList;
     private int dimension;
     private int killed;
     private int injured;
