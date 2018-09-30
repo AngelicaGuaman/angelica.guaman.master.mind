@@ -2,8 +2,14 @@ package es.upm.miw.iwvg.master.mind;
 
 import es.upm.miw.iwvg.master.mind.controllers.RandomColorCombination;
 import es.upm.miw.iwvg.master.mind.models.Combination;
-import es.upm.miw.iwvg.master.mind.utils.ColorSecret;
+import es.upm.miw.iwvg.master.mind.models.CombinationGuess;
+import es.upm.miw.iwvg.master.mind.utils.Color;
+import es.upm.miw.iwvg.master.mind.utils.SecretColor;
 import es.upm.miw.iwvg.master.mind.utils.IO;
+import es.upm.miw.iwvg.master.mind.utils.Message;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MasterMind {
 
@@ -18,18 +24,30 @@ public class MasterMind {
         char[] codeMachine = generateCode();
         RandomColorCombination randomColorCombination = new RandomColorCombination(MAX_LONG_SECRET_CODE);
 
-        Combination secretCode = randomColorCombination.generateCombinationColor();
+        Combination secret = randomColorCombination.generateCombinationColor();
+        List<SecretColor> colors = new ArrayList<>();
+        colors.add(SecretColor.BLUE);
+        colors.add(SecretColor.BLUE);
+        colors.add(SecretColor.BLUE);
+        colors.add(SecretColor.BLUE);
+
+        Combination guess = new Combination(colors);
 
         io.writeArrayChar(codeMachine);
+
+        io.writeln(Message.GAME_USER.getMessage());
+        io.writeln(Message.GAME_MACHINE.getMessage());
+        io.readString(Message.GAME_OPTION.getMessage());
+
         do {
 
             System.out.println("TURNO " + i);
 
-            String codeUser = io.readString("Intento? [cuatro letras de entre A-amarillo, R-rojo, V-verde, Z-azul,\n" +"B-blanco, N-negro]: ");
+            String codeUser = io.readString("Intento? [cuatro letras de entre A-amarillo, R-rojo, V-verde, Z-azul] ");
             io.writeln(codeUser);
 
-            int numGuess = guess(codeUser.toCharArray(), codeMachine);
-            System.out.println("Muertos; " + numGuess);
+            CombinationGuess combinationGuess = guess(secret, guess);
+
             // int nheridos = heridos(clave, clave2);
             //System.out.println("Heridos: " + nheridos);
 
@@ -38,34 +56,31 @@ public class MasterMind {
 
     }
 
-    public static int guess(char[] codeUser, char[] codeMachine) {
+    public static CombinationGuess guess(Combination secret, Combination guess) {
         int numGuess = 0;
+        List<Color> colorList = new ArrayList<>();
 
-        for (int i = 0; i < MAX_LONG_SECRET_CODE; i++) {
-            if (codeUser[i] == codeMachine[i]) {
-                numGuess++;
+        for(int i = 0; i < secret.getColorList().size(); i++){
+            if(guess.getColorList().get(i).getValue() == secret.getColorList().get(i).getValue()){
+                colorList.add(Color.BLACK);
+            } else if(secret.getColorList().contains(guess.getColorList().get(i))){
+                colorList.add(Color.WHITE);
+            } else{
+                colorList.add(Color.EMPTY);
             }
         }
-        return numGuess;
-    }
 
-    public static int guessa(char[] codeUser, char[] codeMachine) {
-        int numGuess = 0;
+        CombinationGuess combination = new CombinationGuess(colorList);
 
-        for (int i = 0; i < MAX_LONG_SECRET_CODE; i++) {
-            if (codeUser[i] == codeMachine[i]) {
-                numGuess++;
-            }
-        }
-        return numGuess;
+        return combination;
     }
 
     public static char[] generateCode() {
-        char[] possibleCode = new char[]{'A', 'R', 'V', 'Z', 'B', 'N'};
+        char[] possibleCode = new char[]{'A', 'R', 'V', 'Z'};
         char[] secretCode = new char[MAX_LONG_SECRET_CODE];
 
         for (int i = 0; i < MAX_LONG_SECRET_CODE; i++) {
-            int random = (int) (Math.random() * ColorSecret.values().length);
+            int random = (int) (Math.random() * SecretColor.values().length);
             secretCode[i] = possibleCode[random];
         }
         return secretCode;

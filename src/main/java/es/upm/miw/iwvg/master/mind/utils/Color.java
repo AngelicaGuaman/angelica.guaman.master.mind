@@ -3,7 +3,8 @@ package es.upm.miw.iwvg.master.mind.utils;
 public enum Color {
 
     WHITE('B'),
-    BLACK('N');
+    BLACK('N'),
+    EMPTY('-');
 
     private char value;
 

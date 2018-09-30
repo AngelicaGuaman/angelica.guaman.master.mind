@@ -1,7 +1,7 @@
 package es.upm.miw.iwvg.master.mind.controllers;
 
 import es.upm.miw.iwvg.master.mind.models.Combination;
-import es.upm.miw.iwvg.master.mind.utils.ColorSecret;
+import es.upm.miw.iwvg.master.mind.utils.SecretColor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,10 +14,10 @@ public class RandomSecretColorCombination extends ColorCombinationController {
 
     @Override
     public Combination generateCombinationColor() {
-        List<ColorSecret> colorList = new ArrayList<>();
+        List<SecretColor> colorList = new ArrayList<>();
 
         for (int i = 0; i < this.getDimesion(); i++) {
-            colorList.add(ColorSecret.random());
+            colorList.add(SecretColor.random());
         }
 
         Combination combination = new Combination(colorList);
