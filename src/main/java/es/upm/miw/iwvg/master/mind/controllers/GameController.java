@@ -35,7 +35,7 @@ public class GameController {
 
     }
 
-    public void play (){
+    public void play() {
         int playMode = getMenuOption();
 
         setPlayers(playMode);
@@ -45,52 +45,37 @@ public class GameController {
         boolean isWinner = false;
 
         io.writeln("Secreto: ****");
-        PlayerController computerPlayerController = new ComputerPlayerController(MAX_LONG_SECRET_CODE, io);
-        Combination secret = computerPlayerController.generateColorCombination();
+        Combination secret = players[0].generateColorCombination();
 
-        if (playMode == 1) { // partida
-            do {
-                PlayerController manualPlayerController = new ManualPlayerController(MAX_LONG_SECRET_CODE, io);
-                Combination guess = manualPlayerController.generateColorCombination();
+        do {
+            Combination guess = players[1].generateColorCombination();
 
-                CombinationGuess combinationGuess = secret.verifySecretCode(guess);
-                isWinner = combinationGuess.isWinner();
+            CombinationGuess combinationGuess = secret.verifySecretCode(guess);
+            isWinner = combinationGuess.isWinner();
 
-                ++i;
-            } while ((i <= ATTEMPT) && !isWinner);
-        } else { //demo
-            do {
-                PlayerController computerPlayerController2 = new ComputerPlayerController(MAX_LONG_SECRET_CODE, io);
-                Combination guess = computerPlayerController2.generateColorCombination();
-
-                CombinationGuess combinationGuess = secret.verifySecretCode(guess);
-                isWinner = combinationGuess.isWinner();
-
-                ++i;
-            } while ((i <= ATTEMPT) && !isWinner);
-
-        }
+            ++i;
+        } while ((i <= ATTEMPT) && !isWinner);
 
     }
 
-    public void setContinueController(int playMode){
+    public void setContinueController(int playMode) {
         continueController = new ManualContinueController(io);
 
-        if(playMode == 2){
+        if (playMode == 2) {
             continueController = new ComputerContinueController(io);
         }
     }
 
-    private void setPlayers(int option){
+    private void setPlayers(int option) {
         players[0] = new ComputerPlayerController(dimension, io);
         players[1] = new ComputerPlayerController(dimension, io);
 
-        if(option == 1){
+        if (option == 1) {
             players[1] = new ManualPlayerController(dimension, io);
         }
     }
 
-    private int getMenuOption(){
+    private int getMenuOption() {
         io.writeln();
         io.writeln();
 
@@ -113,7 +98,7 @@ public class GameController {
         return option;
     }
 
-    public boolean continuePlaying(){
+    public boolean continuePlaying() {
         return this.continueController.continuePlaying();
     }
 }

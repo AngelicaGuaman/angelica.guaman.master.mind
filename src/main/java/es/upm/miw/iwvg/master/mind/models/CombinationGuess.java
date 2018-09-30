@@ -31,7 +31,7 @@ public class CombinationGuess {
     public boolean isWinner() {
         int i = 0;
 
-        while (this.getColorList().get(i).equals(Color.BLACK) && i < this.getDimension()) {
+        while (i < this.getDimension() && this.getColorList().get(i).equals(Color.BLACK)) {
             i++;
         }
 
