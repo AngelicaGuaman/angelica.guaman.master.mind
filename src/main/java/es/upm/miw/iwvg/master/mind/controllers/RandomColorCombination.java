@@ -13,7 +13,7 @@ public class RandomColorCombination extends ColorCombinationController {
     }
 
     @Override
-    public Combination generateCombinationColor() {
+    public Combination generateColorCombination() {
         List<SecretColor> colorList = new ArrayList<>();
 
         for(int i = 0; i < this.getDimension(); i++){

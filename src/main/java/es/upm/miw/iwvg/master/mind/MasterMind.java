@@ -44,7 +44,7 @@ public class MasterMind {
         Combination guess = new Combination(MAX_LONG_SECRET_CODE, colors);
 
         RandomColorCombination randomColorCombination = new RandomColorCombination(MAX_LONG_SECRET_CODE);
-        Combination secret = randomColorCombination.generateCombinationColor();
+        Combination secret = randomColorCombination.generateColorCombination();
 
         int i = 1;
         boolean isWinner = false;
@@ -64,7 +64,7 @@ public class MasterMind {
         } else { //demo
 
             do {
-                guess = randomColorCombination.generateCombinationColor();
+                guess = randomColorCombination.generateColorCombination();
 
                 String codeUser = io.readString(Message.ATTEMPT.getMessage());
                 io.writeln(codeUser);
