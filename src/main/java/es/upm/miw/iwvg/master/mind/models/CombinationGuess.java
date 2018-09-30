@@ -1,6 +1,7 @@
 package es.upm.miw.iwvg.master.mind.models;
 
 import es.upm.miw.iwvg.master.mind.utils.Color;
+import es.upm.miw.iwvg.master.mind.utils.SecretColor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,8 +61,11 @@ public class CombinationGuess {
 
     @Override
     public String toString() {
-        return "CombinationGuess{" +
-                "colorList=" + colorList +
-                '}';
+        String result = "";
+
+        for(Color color : this.getColorList()){
+            result += color.getValue();
+        }
+        return result;
     }
 }

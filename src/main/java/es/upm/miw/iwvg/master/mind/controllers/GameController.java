@@ -53,7 +53,10 @@ public class GameController {
 
             if (!isWinner) {
                 i++;
+                //io.writeln();
+                //io.writeln("Código muerto/herido: " + combinationGuess.toString());
                 io.writeln(String.format(Message.RESULT.getMessage(), combinationGuess.getKilled(), combinationGuess.getInjured()));
+                //io.writeln();
             } else {
                 io.writeln(String.format(Message.WINNER.getMessage(), combinationGuess.getKilled()));
             }
