@@ -19,9 +19,6 @@ public class MasterMind {
     public static void main(String[] args) {
 
         IO io = new IO();
-
-        int i = 1;
-        char[] codeMachine = generateCode();
         RandomColorCombination randomColorCombination = new RandomColorCombination(MAX_LONG_SECRET_CODE);
 
         Combination secret = randomColorCombination.generateCombinationColor();
@@ -31,59 +28,24 @@ public class MasterMind {
         colors.add(SecretColor.BLUE);
         colors.add(SecretColor.BLUE);
 
-        Combination guess = new Combination(colors);
+        Combination guess = new Combination(MAX_LONG_SECRET_CODE, colors);
 
-        io.writeArrayChar(codeMachine);
-
+        io.writeln(Message.WELCOME.toString());
         io.writeln(Message.GAME_USER.getMessage());
         io.writeln(Message.GAME_MACHINE.getMessage());
         io.readString(Message.GAME_OPTION.getMessage());
 
+        int i = 1;
+
         do {
-
-            System.out.println("TURNO " + i);
-
-            String codeUser = io.readString("Intento? [cuatro letras de entre A-amarillo, R-rojo, V-verde, Z-azul] ");
+            String codeUser = io.readString(Message.ATTEMPT.getMessage());
             io.writeln(codeUser);
 
-            CombinationGuess combinationGuess = guess(secret, guess);
-
-            // int nheridos = heridos(clave, clave2);
-            //System.out.println("Heridos: " + nheridos);
+            CombinationGuess combinationGuess = secret.verifySecretCode(guess);
+            boolean isWinner = combinationGuess.isWinner();
 
             ++i;
         } while ((i <= ATTEMPT));
 
     }
-
-    public static CombinationGuess guess(Combination secret, Combination guess) {
-        int numGuess = 0;
-        List<Color> colorList = new ArrayList<>();
-
-        for(int i = 0; i < secret.getColorList().size(); i++){
-            if(guess.getColorList().get(i).getValue() == secret.getColorList().get(i).getValue()){
-                colorList.add(Color.BLACK);
-            } else if(secret.getColorList().contains(guess.getColorList().get(i))){
-                colorList.add(Color.WHITE);
-            } else{
-                colorList.add(Color.EMPTY);
-            }
-        }
-
-        CombinationGuess combination = new CombinationGuess(colorList);
-
-        return combination;
-    }
-
-    public static char[] generateCode() {
-        char[] possibleCode = new char[]{'A', 'R', 'V', 'Z'};
-        char[] secretCode = new char[MAX_LONG_SECRET_CODE];
-
-        for (int i = 0; i < MAX_LONG_SECRET_CODE; i++) {
-            int random = (int) (Math.random() * SecretColor.values().length);
-            secretCode[i] = possibleCode[random];
-        }
-        return secretCode;
-    }
-
 }

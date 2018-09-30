@@ -20,7 +20,7 @@ public class RandomColorCombination extends ColorCombinationController {
             colorList.add(SecretColor.random());
         }
 
-        Combination combination = new Combination(colorList);
+        Combination combination = new Combination(this.getDimesion(), colorList);
 
         return combination;
     }

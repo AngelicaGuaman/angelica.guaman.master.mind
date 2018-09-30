@@ -4,15 +4,16 @@ import es.upm.miw.iwvg.master.mind.models.Combination;
 
 public abstract class ColorCombinationController {
 
-    private int dimesion;
+    private int dimension;
 
     public ColorCombinationController(int dimesion){
-        this.dimesion = dimesion;
+        assert dimesion > 0;
+        this.dimension = dimesion;
     }
 
     public abstract Combination generateCombinationColor();
 
     public int getDimesion() {
-        return dimesion;
+        return dimension;
     }
 }
