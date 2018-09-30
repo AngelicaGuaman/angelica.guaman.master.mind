@@ -2,6 +2,7 @@ package es.upm.miw.iwvg.master.mind.controllers;
 
 import es.upm.miw.iwvg.master.mind.models.Combination;
 import es.upm.miw.iwvg.master.mind.utils.IO;
+import es.upm.miw.iwvg.master.mind.utils.Message;
 import es.upm.miw.iwvg.master.mind.utils.SecretColor;
 
 import java.util.ArrayList;
@@ -21,6 +22,8 @@ public class RandomColorCombination extends ColorCombinationController {
             colorList.add(SecretColor.random());
         }
 
-        return new Combination(this.getDimension(), colorList);
+        Combination combination = new Combination(this.getDimension(), colorList);
+        this.getIo().writeln(Message.ATTEMPT.getMessage()+combination.toString());
+        return combination;
     }
 }

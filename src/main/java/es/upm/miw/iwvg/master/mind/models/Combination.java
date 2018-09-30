@@ -55,8 +55,11 @@ public class Combination {
 
     @Override
     public String toString() {
-        return "Combination{" +
-                "colorList=" + colorList +
-                '}';
+        String result = "";
+
+        for(SecretColor secretColor : this.getColorList()){
+            result += secretColor.getValue();
+        }
+        return result;
     }
 }

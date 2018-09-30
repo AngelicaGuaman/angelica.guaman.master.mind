@@ -34,11 +34,11 @@ public class MasterMind {
         int i = 1;
         boolean isWinner = false;
 
-        if (option == 1) { // partida
-            io.writeln("Secreto: ****");
-            PlayerController computerPlayerController = new ComputerPlayerController(MAX_LONG_SECRET_CODE, io);
-            Combination secret = computerPlayerController.generateColorCombination();
+        io.writeln("Secreto: ****");
+        PlayerController computerPlayerController = new ComputerPlayerController(MAX_LONG_SECRET_CODE, io);
+        Combination secret = computerPlayerController.generateColorCombination();
 
+        if (option == 1) { // partida
             do {
                 PlayerController manualPlayerController = new ManualPlayerController(MAX_LONG_SECRET_CODE, io);
                 Combination guess = manualPlayerController.generateColorCombination();
@@ -49,10 +49,6 @@ public class MasterMind {
                 ++i;
             } while ((i <= ATTEMPT) && !isWinner);
         } else { //demo
-
-            PlayerController computerPlayerController1 = new ComputerPlayerController(MAX_LONG_SECRET_CODE, io);
-            Combination secret = computerPlayerController1.generateColorCombination();
-
             do {
                 PlayerController computerPlayerController2 = new ComputerPlayerController(MAX_LONG_SECRET_CODE, io);
                 Combination guess = computerPlayerController2.generateColorCombination();
