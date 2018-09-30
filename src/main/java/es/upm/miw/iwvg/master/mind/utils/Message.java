@@ -2,7 +2,8 @@ package es.upm.miw.iwvg.master.mind.utils;
 
 public enum Message {
     GAME_USER("1. Partida"),
-    GAME_MACHINE("2. Demo");
+    GAME_MACHINE("2. Demo"),
+    GAME_OPTION("Opción ? ");
 
     private String message;
 

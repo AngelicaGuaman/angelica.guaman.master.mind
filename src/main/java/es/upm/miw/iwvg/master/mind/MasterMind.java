@@ -2,7 +2,7 @@ package es.upm.miw.iwvg.master.mind;
 
 import es.upm.miw.iwvg.master.mind.controllers.RandomColorCombination;
 import es.upm.miw.iwvg.master.mind.models.Combination;
-import es.upm.miw.iwvg.master.mind.utils.Color;
+import es.upm.miw.iwvg.master.mind.utils.ColorSecret;
 import es.upm.miw.iwvg.master.mind.utils.IO;
 
 public class MasterMind {
@@ -65,7 +65,7 @@ public class MasterMind {
         char[] secretCode = new char[MAX_LONG_SECRET_CODE];
 
         for (int i = 0; i < MAX_LONG_SECRET_CODE; i++) {
-            int random = (int) (Math.random() * Color.values().length);
+            int random = (int) (Math.random() * ColorSecret.values().length);
             secretCode[i] = possibleCode[random];
         }
         return secretCode;

@@ -1,22 +1,22 @@
 package es.upm.miw.iwvg.master.mind.models;
 
-import es.upm.miw.iwvg.master.mind.utils.Color;
+import es.upm.miw.iwvg.master.mind.utils.ColorSecret;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Combination {
-    private List<Color> colorList = new ArrayList<>();
+    private List<ColorSecret> colorList = new ArrayList<>();
 
-    public Combination(List<Color> colorList) {
+    public Combination(List<ColorSecret> colorList) {
         this.colorList = new ArrayList<>(colorList);
     }
 
-    public List<Color> getColorList() {
+    public List<ColorSecret> getColorList() {
         return colorList;
     }
 
-    public void setColorList(List<Color> colorList) {
+    public void setColorList(List<ColorSecret> colorList) {
         this.colorList = colorList;
     }
 
