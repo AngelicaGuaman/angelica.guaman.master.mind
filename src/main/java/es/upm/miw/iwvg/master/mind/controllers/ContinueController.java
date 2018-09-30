@@ -11,7 +11,7 @@ public abstract class ContinueController {
         this.io = io;
     }
 
-    public abstract boolean isContinuePlaying();
+    public abstract boolean continuePlaying();
 
     public IO getIo() {
         return io;

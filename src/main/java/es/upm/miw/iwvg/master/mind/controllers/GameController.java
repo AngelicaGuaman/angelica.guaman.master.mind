@@ -1,18 +1,21 @@
 package es.upm.miw.iwvg.master.mind.controllers;
 
-import es.upm.miw.iwvg.master.mind.models.Board;
+import es.upm.miw.iwvg.master.mind.models.Combination;
+import es.upm.miw.iwvg.master.mind.models.CombinationGuess;
 import es.upm.miw.iwvg.master.mind.utils.IO;
 import es.upm.miw.iwvg.master.mind.utils.Message;
 
 public class GameController {
 
-    private Board board;
+    private BoardController boardController;
+
+    private PlayerController[] players;
+
+    private ContinueController continueController;
 
     private IO io;
 
     private int dimension;
-
-    private PlayerController[] players;
 
     private static final int NUM_PLAYERS = 2;
 
@@ -33,13 +36,52 @@ public class GameController {
     }
 
     public void play (){
-        int option = getMenuOption();
+        int playMode = getMenuOption();
 
-        setPlayers(option);
+        setPlayers(playMode);
+        setContinueController(playMode);
+
+        int i = 1;
+        boolean isWinner = false;
+
+        io.writeln("Secreto: ****");
+        PlayerController computerPlayerController = new ComputerPlayerController(MAX_LONG_SECRET_CODE, io);
+        Combination secret = computerPlayerController.generateColorCombination();
+
+        if (playMode == 1) { // partida
+            do {
+                PlayerController manualPlayerController = new ManualPlayerController(MAX_LONG_SECRET_CODE, io);
+                Combination guess = manualPlayerController.generateColorCombination();
+
+                CombinationGuess combinationGuess = secret.verifySecretCode(guess);
+                isWinner = combinationGuess.isWinner();
+
+                ++i;
+            } while ((i <= ATTEMPT) && !isWinner);
+        } else { //demo
+            do {
+                PlayerController computerPlayerController2 = new ComputerPlayerController(MAX_LONG_SECRET_CODE, io);
+                Combination guess = computerPlayerController2.generateColorCombination();
+
+                CombinationGuess combinationGuess = secret.verifySecretCode(guess);
+                isWinner = combinationGuess.isWinner();
+
+                ++i;
+            } while ((i <= ATTEMPT) && !isWinner);
+
+        }
 
     }
 
-    public void setPlayers(int option){
+    public void setContinueController(int playMode){
+        continueController = new ManualContinueController(io);
+
+        if(playMode == 2){
+            continueController = new ComputerContinueController(io);
+        }
+    }
+
+    private void setPlayers(int option){
         players[0] = new ComputerPlayerController(dimension, io);
         players[1] = new ComputerPlayerController(dimension, io);
 
@@ -48,7 +90,10 @@ public class GameController {
         }
     }
 
-    public int getMenuOption(){
+    private int getMenuOption(){
+        io.writeln();
+        io.writeln();
+
         io.writeln(Message.WELCOME.getMessage());
         io.writeln(Message.GAME_USER.getMessage());
         io.writeln(Message.GAME_MACHINE.getMessage());
@@ -66,5 +111,9 @@ public class GameController {
         } while (!ok);
 
         return option;
+    }
+
+    public boolean continuePlaying(){
+        return this.continueController.continuePlaying();
     }
 }

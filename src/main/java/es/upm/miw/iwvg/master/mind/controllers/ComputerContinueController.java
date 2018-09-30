@@ -9,7 +9,7 @@ public class ComputerContinueController extends ContinueController{
     }
 
     @Override
-    public boolean isContinuePlaying() {
+    public boolean continuePlaying() {
         return false;
     }
 }

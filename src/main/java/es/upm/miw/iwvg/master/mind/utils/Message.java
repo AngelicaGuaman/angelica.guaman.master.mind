@@ -8,7 +8,10 @@ public enum Message {
     GAME_OPTION_ERROR("La opcion que ha seleccionado no es correcta. Inténtelo otra vez "),
     MASK_SECRET("*"),
     ATTEMPT("Intento? [cuatro letras de entre A-amarillo, R-rojo, V-verde, Z-azul] "),
-    CONTINUE_PLAYING("Desea seguir jugando ? [Y/N] ");
+    CONTINUE_PLAYING("Desea seguir jugando ? [Y/N] "),
+    YES("Y"),
+    NO("N"),
+    RESULT("%d muerto/s y %d herido/s");
 
     private String message;
 
