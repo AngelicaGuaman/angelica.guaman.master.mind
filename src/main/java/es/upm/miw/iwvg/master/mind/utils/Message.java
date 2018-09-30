@@ -5,6 +5,7 @@ public enum Message {
     GAME_USER("1. Partida"),
     GAME_MACHINE("2. Demo"),
     GAME_OPTION("Opción ? "),
+    GAME_OPTION_ERROR("La opcion que ha seleccionado no es correcta. Inténtelo otra vez "),
     MASK_SECRET("*"),
     ATTEMPT("Intento? [cuatro letras de entre A-amarillo, R-rojo, V-verde, Z-azul] ");
 

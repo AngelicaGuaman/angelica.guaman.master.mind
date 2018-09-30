@@ -14,6 +14,7 @@ public class MasterMind {
 
     static final int ATTEMPT = 10;
     static final int MAX_LONG_SECRET_CODE = 4;
+    static final int NUMBER_PLAY_MODE = 2;
 
     public static void main(String[] args) {
 
@@ -32,7 +33,13 @@ public class MasterMind {
         io.writeln(Message.WELCOME.toString());
         io.writeln(Message.GAME_USER.getMessage());
         io.writeln(Message.GAME_MACHINE.getMessage());
-        io.readString(Message.GAME_OPTION.getMessage());
+
+        int option;
+        do{
+            io.writeln(Message.GAME_OPTION_ERROR.getMessage());
+            option = io.readInt(Message.GAME_OPTION.getMessage());
+
+        }while(!(option > 0 && option <= NUMBER_PLAY_MODE));
 
         int i = 1;
         boolean isWinner;
@@ -46,6 +53,5 @@ public class MasterMind {
 
             ++i;
         } while ((i <= ATTEMPT) && !isWinner);
-
     }
 }
