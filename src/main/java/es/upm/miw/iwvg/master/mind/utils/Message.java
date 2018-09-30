@@ -11,7 +11,9 @@ public enum Message {
     CONTINUE_PLAYING("Desea seguir jugando ? [Y/N] "),
     YES("Y"),
     NO("N"),
-    RESULT("%d muerto/s y %d herido/s");
+    AVAILABLE_ATTEMPT("Ya no tienes más intento."),
+    RESULT("%d muerto/s y %d herido/s"),
+    WINNER("%d muertos!!! Victoria");
 
     private String message;
 

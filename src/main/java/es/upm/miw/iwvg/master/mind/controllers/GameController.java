@@ -21,8 +21,6 @@ public class GameController {
 
     private static final int ATTEMPT = 10;
 
-    private static final int MAX_LONG_SECRET_CODE = 4;
-
     private static final int NUMBER_PLAY_MODE = 2;
 
     public GameController(int dimension, IO io) {
@@ -41,7 +39,7 @@ public class GameController {
         setPlayers(playMode);
         setContinueController(playMode);
 
-        int i = 1;
+        int i = 0;
         boolean isWinner = false;
 
         io.writeln("Secreto: ****");
@@ -53,9 +51,19 @@ public class GameController {
             CombinationGuess combinationGuess = secret.verifySecretCode(guess);
             isWinner = combinationGuess.isWinner();
 
-            ++i;
+            if (!isWinner) {
+                i++;
+                io.writeln(String.format(Message.RESULT.getMessage(), combinationGuess.getKilled(), combinationGuess.getInjured()));
+            } else {
+                io.writeln(String.format(Message.WINNER.getMessage(), combinationGuess.getKilled()));
+            }
         } while ((i <= ATTEMPT) && !isWinner);
 
+        if ((i - 1) == ATTEMPT) {
+            io.writeln();
+            io.writeln(Message.AVAILABLE_ATTEMPT.getMessage());
+            io.writeln("El código secreto era: " + secret.toString());
+        }
     }
 
     public void setContinueController(int playMode) {
