@@ -1,16 +1,19 @@
 package es.upm.miw.iwvg.master.mind.models;
 
 import es.upm.miw.iwvg.master.mind.controllers.GameController;
-import es.upm.miw.iwvg.master.mind.utils.IO;
+import es.upm.miw.iwvg.master.mind.utils.State;
 
 public class Game {
 
-    GameController gameController;
+    private State state;
 
-    public Game(int dimension, IO io) {
+    private GameController gameController;
+
+    public Game(int dimension) {
         assert dimension > 0;
-        assert io != null;
-        gameController = new GameController(dimension, io);
+
+        this.state = State.INITIAL;
+        gameController = new GameController(dimension);
 
     }
 
@@ -22,5 +25,9 @@ public class Game {
             continuePlaying = gameController.continuePlaying();
         }while(continuePlaying);
 
+    }
+
+    public State getState() {
+        return state;
     }
 }

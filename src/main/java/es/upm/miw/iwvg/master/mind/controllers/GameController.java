@@ -23,14 +23,13 @@ public class GameController {
 
     private static final int ATTEMPT = 10;
 
-    public GameController(int dimension, IO io) {
+    public GameController(int dimension) {
         assert dimension > 0;
-        assert io != null;
 
         this.dimension = dimension;
-        this.io = io;
+        this.io = new IO();
         this.players = new PlayerController[NUM_PLAYERS];
-        this.boardController = new BoardController(dimension, io);
+        this.boardController = new BoardController(dimension);
         menuController = new MenuController();
     }
 
@@ -70,19 +69,19 @@ public class GameController {
     }
 
     public void setContinueController(int playMode) {
-        continueController = new ManualContinueController(io);
+        continueController = new ManualContinueController();
 
         if (playMode == 2) {
-            continueController = new ComputerContinueController(io);
+            continueController = new ComputerContinueController();
         }
     }
 
     private void setPlayers(int option) {
-        players[0] = new ComputerPlayerController(dimension, io);
-        players[1] = new ComputerPlayerController(dimension, io);
+        players[0] = new ComputerPlayerController(dimension);
+        players[1] = new ComputerPlayerController(dimension);
 
         if (option == 1) {
-            players[1] = new ManualPlayerController(dimension, io);
+            players[1] = new ManualPlayerController(dimension);
         }
     }
 

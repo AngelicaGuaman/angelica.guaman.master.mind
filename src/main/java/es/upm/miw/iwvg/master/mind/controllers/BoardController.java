@@ -2,17 +2,15 @@ package es.upm.miw.iwvg.master.mind.controllers;
 
 import es.upm.miw.iwvg.master.mind.models.Board;
 import es.upm.miw.iwvg.master.mind.models.Combination;
-import es.upm.miw.iwvg.master.mind.utils.IO;
 
 public class BoardController {
 
     Board board;
 
-    public BoardController(int dimension, IO io){
+    public BoardController(int dimension){
         assert dimension > 0;
-        assert io != null;
 
-        board = new Board(dimension, new RandomColorCombinationController(dimension, io));
+        board = new Board(dimension, new RandomColorCombinationController(dimension));
     }
 
     public void setSecretCombination(){

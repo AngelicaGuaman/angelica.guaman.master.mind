@@ -1,12 +1,10 @@
 package es.upm.miw.iwvg.master.mind.controllers;
 
-import es.upm.miw.iwvg.master.mind.utils.IO;
 import es.upm.miw.iwvg.master.mind.utils.Message;
 
 public class ManualContinueController extends ContinueController {
 
-    public ManualContinueController(IO io) {
-        super(io);
+    public ManualContinueController() {
     }
 
     @Override

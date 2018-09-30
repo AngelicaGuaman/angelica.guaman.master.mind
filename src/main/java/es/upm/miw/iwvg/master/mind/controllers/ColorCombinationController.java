@@ -5,15 +5,14 @@ import es.upm.miw.iwvg.master.mind.utils.IO;
 
 public abstract class ColorCombinationController {
 
-    private IO io;
     private int dimension;
+    private IO io;
 
-    public ColorCombinationController(int dimension, IO io){
+    public ColorCombinationController(int dimension) {
         assert dimension > 0;
-        assert io != null;
 
+        this.io = new IO();
         this.dimension = dimension;
-        this.io = io;
     }
 
     public abstract Combination generateColorCombination();
