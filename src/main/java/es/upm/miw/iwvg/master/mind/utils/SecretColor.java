@@ -19,4 +19,13 @@ public enum SecretColor {
     public static SecretColor random() {
         return values()[(int) (Math.random() * SecretColor.values().length)];
     }
+
+    public static SecretColor getByValue(char value){
+        for(SecretColor secretColor : values()){
+            if(secretColor.getValue() == value){
+                return secretColor;
+            }
+        }
+        return null;
+    }
 }

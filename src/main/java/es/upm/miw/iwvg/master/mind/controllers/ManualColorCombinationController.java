@@ -26,7 +26,8 @@ public class ManualColorCombinationController extends ColorCombinationController
         List<SecretColor> colorList = new ArrayList<>();
 
         for (int i = 0; i < guessColors.length(); i++) {
-            SecretColor color = SecretColor.valueOf(guessColors.charAt(i)+"");
+            SecretColor color = SecretColor.getByValue(guessColors.charAt(i));
+            //TODO Devolver error cuando es null
             colorList.add(color);
         }
 

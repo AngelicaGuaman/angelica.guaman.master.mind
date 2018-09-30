@@ -1,17 +1,10 @@
 package es.upm.miw.iwvg.master.mind;
 
-import es.upm.miw.iwvg.master.mind.controllers.ColorCombinationController;
-import es.upm.miw.iwvg.master.mind.controllers.ManualPlayerController;
-import es.upm.miw.iwvg.master.mind.controllers.PlayerController;
-import es.upm.miw.iwvg.master.mind.controllers.RandomColorCombination;
+import es.upm.miw.iwvg.master.mind.controllers.*;
 import es.upm.miw.iwvg.master.mind.models.Combination;
 import es.upm.miw.iwvg.master.mind.models.CombinationGuess;
-import es.upm.miw.iwvg.master.mind.utils.SecretColor;
 import es.upm.miw.iwvg.master.mind.utils.IO;
 import es.upm.miw.iwvg.master.mind.utils.Message;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MasterMind {
 
@@ -38,19 +31,16 @@ public class MasterMind {
             }
         } while (!ok);
 
-        RandomColorCombination randomColorCombination = new RandomColorCombination(MAX_LONG_SECRET_CODE, io);
-        Combination secret = randomColorCombination.generateColorCombination();
-
         int i = 1;
         boolean isWinner = false;
 
         if (option == 1) { // partida
             io.writeln("Secreto: ****");
+            PlayerController computerPlayerController = new ComputerPlayerController(MAX_LONG_SECRET_CODE, io);
+            Combination secret = computerPlayerController.generateColorCombination();
 
             do {
-
                 PlayerController manualPlayerController = new ManualPlayerController(MAX_LONG_SECRET_CODE, io);
-
                 Combination guess = manualPlayerController.generateColorCombination();
 
                 CombinationGuess combinationGuess = secret.verifySecretCode(guess);
@@ -60,17 +50,18 @@ public class MasterMind {
             } while ((i <= ATTEMPT) && !isWinner);
         } else { //demo
 
-           /* do {
-                guess = manualPlayerController.generateColorCombination();
+            PlayerController computerPlayerController1 = new ComputerPlayerController(MAX_LONG_SECRET_CODE, io);
+            Combination secret = computerPlayerController1.generateColorCombination();
 
-                String codeUser = io.readString(Message.ATTEMPT.getMessage());
-                io.writeln(codeUser);
+            do {
+                PlayerController computerPlayerController2 = new ComputerPlayerController(MAX_LONG_SECRET_CODE, io);
+                Combination guess = computerPlayerController2.generateColorCombination();
 
                 CombinationGuess combinationGuess = secret.verifySecretCode(guess);
                 isWinner = combinationGuess.isWinner();
 
                 ++i;
-            } while ((i <= ATTEMPT) && !isWinner);*/
+            } while ((i <= ATTEMPT) && !isWinner);
 
         }
 
