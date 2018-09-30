@@ -1,18 +1,18 @@
 package es.upm.miw.iwvg.master.mind.views;
 
-import es.upm.miw.iwvg.master.mind.utils.Color;
+import es.upm.miw.iwvg.master.mind.utils.ColorResponse;
 import es.upm.miw.iwvg.master.mind.utils.IO;
 
 public class ColorView {
 
     private static final char[] COLORS = { 'B', 'N', '-'};
 
-    private Color color;
+    private ColorResponse colorResponse;
 
     private IO io;
 
-    public ColorView(Color color) {
-        this.color = color;
+    public ColorView(ColorResponse colorResponse) {
+        this.colorResponse = colorResponse;
         io = new IO();
     }
 
@@ -26,6 +26,6 @@ public class ColorView {
     }
 
     private char toChar() {
-        return COLORS[color.ordinal()];
+        return COLORS[colorResponse.ordinal()];
     }
 }

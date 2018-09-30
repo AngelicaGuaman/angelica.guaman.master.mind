@@ -1,26 +1,26 @@
 package es.upm.miw.iwvg.master.mind.views;
 
-import es.upm.miw.iwvg.master.mind.utils.Color;
+import es.upm.miw.iwvg.master.mind.utils.ColorResponse;
 import es.upm.miw.iwvg.master.mind.utils.IO;
 
 import java.util.List;
 
 public class CombinationGuessView {
 
-    private List<Color> colorList;
+    private List<ColorResponse> colorResponseList;
 
     private IO io;
 
-    public CombinationGuessView(List<Color> secretColorList) {
-        this.colorList = secretColorList;
+    public CombinationGuessView(List<ColorResponse> secretColorResponseList) {
+        this.colorResponseList = secretColorResponseList;
         io = new IO();
     }
 
     void write(String title) {
         String result = "";
 
-        for(Color color : colorList){
-            result += color.getValue();
+        for(ColorResponse colorResponse : colorResponseList){
+            result += colorResponse.getValue();
         }
 
         io.writeln(result);

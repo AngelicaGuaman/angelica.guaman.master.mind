@@ -1,6 +1,6 @@
 package es.upm.miw.iwvg.master.mind.models;
 
-import es.upm.miw.iwvg.master.mind.utils.Color;
+import es.upm.miw.iwvg.master.mind.utils.ColorResponse;
 import es.upm.miw.iwvg.master.mind.utils.SecretColor;
 
 import java.util.ArrayList;
@@ -29,28 +29,28 @@ public class Combination {
         this.colorList = colorList;
     }
 
-    public CombinationGuess verifySecretCode(Combination guess) {
+    public CombinationResponse verifySecretCode(Combination guess) {
         assert guess != null;
 
-        List<Color> colorList = new ArrayList<>();
-        CombinationGuess combinationGuess = new CombinationGuess(this.getDimension(), colorList);
+        List<ColorResponse> colorResponseList = new ArrayList<>();
+        CombinationResponse combinationResponse = new CombinationResponse(this.getDimension(), colorResponseList);
 
         for (int i = 0; i < this.getDimension(); i++) {
             if (guess.getColorList().contains(this.getColorList().get(i))) {
                 if (guess.getColorList().get(i).equals(this.getColorList().get(i))) {
-                    colorList.add(Color.BLACK);
-                    combinationGuess.setKilled(combinationGuess.getKilled() + 1);
+                    colorResponseList.add(ColorResponse.BLACK);
+                    combinationResponse.setKilled(combinationResponse.getKilled() + 1);
                 } else {
-                    colorList.add(Color.WHITE);
-                    combinationGuess.setInjured(combinationGuess.getInjured() + 1);
+                    colorResponseList.add(ColorResponse.WHITE);
+                    combinationResponse.setInjured(combinationResponse.getInjured() + 1);
                 }
             } else {
-                colorList.add(Color.EMPTY);
+                colorResponseList.add(ColorResponse.EMPTY);
             }
         }
 
-        combinationGuess.setColorList(colorList);
-        return combinationGuess;
+        combinationResponse.setColorResponseList(colorResponseList);
+        return combinationResponse;
     }
 
     @Override

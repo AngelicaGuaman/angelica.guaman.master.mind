@@ -1,7 +1,7 @@
 package es.upm.miw.iwvg.master.mind.controllers;
 
 import es.upm.miw.iwvg.master.mind.models.Combination;
-import es.upm.miw.iwvg.master.mind.models.CombinationGuess;
+import es.upm.miw.iwvg.master.mind.models.CombinationResponse;
 import es.upm.miw.iwvg.master.mind.utils.IO;
 import es.upm.miw.iwvg.master.mind.utils.Message;
 
@@ -50,15 +50,15 @@ public class GameController {
         do {
             Combination guess = players[1].generateColorCombination();
 
-            CombinationGuess combinationGuess = secret.verifySecretCode(guess);
-            isWinner = combinationGuess.isWinner();
-            io.writeln("Código muerto/herido [N-negro, B-blanco]: " + combinationGuess.toString());
+            CombinationResponse combinationResponse = secret.verifySecretCode(guess);
+            isWinner = combinationResponse.isWinner();
+            io.writeln("Código muerto/herido [N-negro, B-blanco]: " + combinationResponse.toString());
 
             if (!isWinner) {
                 i++;
-                io.writeln(String.format(Message.RESULT.getMessage(), combinationGuess.getKilled(), combinationGuess.getInjured()));
+                io.writeln(String.format(Message.RESULT.getMessage(), combinationResponse.getKilled(), combinationResponse.getInjured()));
             } else {
-                io.writeln(String.format(Message.WINNER.getMessage(), combinationGuess.getKilled()));
+                io.writeln(String.format(Message.WINNER.getMessage(), combinationResponse.getKilled()));
             }
         } while ((i <= ATTEMPT) && !isWinner);
 

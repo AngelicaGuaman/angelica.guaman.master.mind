@@ -1,6 +1,6 @@
 package es.upm.miw.iwvg.master.mind.utils;
 
-public enum Color {
+public enum ColorResponse {
 
     WHITE('B'),
     BLACK('N'),
@@ -8,7 +8,7 @@ public enum Color {
 
     private char value;
 
-    private Color(char value) {
+    private ColorResponse(char value) {
         this.value = value;
     }
 

@@ -2,11 +2,9 @@ package es.upm.miw.iwvg.master.mind.models;
 
 import es.upm.miw.iwvg.master.mind.controllers.ColorCombinationController;
 
-import java.util.ArrayList;
-
 public class Board {
     private Combination secretCode;
-    private CombinationGuess combinationGuess;
+    private CombinationResponse combinationResponse;
     private ColorCombinationController colorCombinationController;
     private int dimension;
 
@@ -22,8 +20,8 @@ public class Board {
         assert combination != null;
         assert !combination.getColorList().isEmpty();
 
-        this.combinationGuess = this.getSecretCode().verifySecretCode(combination);
-        return this.combinationGuess.isWinner();
+        this.combinationResponse = this.getSecretCode().verifySecretCode(combination);
+        return this.combinationResponse.isWinner();
     }
 
     public Combination getSecretCode() {
@@ -35,10 +33,10 @@ public class Board {
     }
 
     public int getKilled() {
-        return combinationGuess.getKilled();
+        return combinationResponse.getKilled();
     }
 
     public int getInjured() {
-        return combinationGuess.getInjured();
+        return combinationResponse.getInjured();
     }
 }

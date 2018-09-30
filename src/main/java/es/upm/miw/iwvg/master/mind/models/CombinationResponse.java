@@ -1,37 +1,37 @@
 package es.upm.miw.iwvg.master.mind.models;
 
-import es.upm.miw.iwvg.master.mind.utils.Color;
+import es.upm.miw.iwvg.master.mind.utils.ColorResponse;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CombinationGuess {
-    private List<Color> colorList;
+public class CombinationResponse {
+    private List<ColorResponse> colorResponseList;
     private int dimension;
     private int killed;
     private int injured;
 
-    public CombinationGuess(int dimension, List<Color> colorList) {
+    public CombinationResponse(int dimension, List<ColorResponse> colorResponseList) {
         assert dimension > 0;
 
         this.dimension = dimension;
-        this.colorList = new ArrayList<>(colorList);
+        this.colorResponseList = new ArrayList<>(colorResponseList);
         this.killed = 0;
         this.injured = 0;
     }
 
-    public List<Color> getColorList() {
-        return colorList;
+    public List<ColorResponse> getColorResponseList() {
+        return colorResponseList;
     }
 
-    public void setColorList(List<Color> colorList) {
-        this.colorList = colorList;
+    public void setColorResponseList(List<ColorResponse> colorResponseList) {
+        this.colorResponseList = colorResponseList;
     }
 
     public boolean isWinner() {
         int i = 0;
 
-        while (i < this.getDimension() && this.getColorList().get(i).equals(Color.BLACK)) {
+        while (i < this.getDimension() && this.getColorResponseList().get(i).equals(ColorResponse.BLACK)) {
             i++;
         }
 
@@ -62,8 +62,8 @@ public class CombinationGuess {
     public String toString() {
         String result = "";
 
-        for(Color color : this.getColorList()){
-            result += color.getValue();
+        for(ColorResponse colorResponse : this.getColorResponseList()){
+            result += colorResponse.getValue();
         }
         return result;
     }
