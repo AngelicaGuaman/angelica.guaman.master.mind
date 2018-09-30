@@ -30,6 +30,8 @@ public class Combination {
     }
 
     public CombinationGuess verifySecretCode(Combination guess) {
+        assert guess != null;
+
         List<Color> colorList = new ArrayList<>();
         CombinationGuess combinationGuess = new CombinationGuess(this.getDimension(), colorList);
 

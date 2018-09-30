@@ -1,5 +1,8 @@
 package es.upm.miw.iwvg.master.mind;
 
+import es.upm.miw.iwvg.master.mind.controllers.ColorCombinationController;
+import es.upm.miw.iwvg.master.mind.controllers.ManualPlayerController;
+import es.upm.miw.iwvg.master.mind.controllers.PlayerController;
 import es.upm.miw.iwvg.master.mind.controllers.RandomColorCombination;
 import es.upm.miw.iwvg.master.mind.models.Combination;
 import es.upm.miw.iwvg.master.mind.models.CombinationGuess;
@@ -35,15 +38,7 @@ public class MasterMind {
             }
         } while (!ok);
 
-        List<SecretColor> colors = new ArrayList<>();
-        colors.add(SecretColor.BLUE);
-        colors.add(SecretColor.BLUE);
-        colors.add(SecretColor.BLUE);
-        colors.add(SecretColor.BLUE);
-
-        Combination guess = new Combination(MAX_LONG_SECRET_CODE, colors);
-
-        RandomColorCombination randomColorCombination = new RandomColorCombination(MAX_LONG_SECRET_CODE);
+        RandomColorCombination randomColorCombination = new RandomColorCombination(MAX_LONG_SECRET_CODE, io);
         Combination secret = randomColorCombination.generateColorCombination();
 
         int i = 1;
@@ -53,8 +48,10 @@ public class MasterMind {
             io.writeln("Secreto: ****");
 
             do {
-                String codeUser = io.readString(Message.ATTEMPT.getMessage());
-                io.writeln(codeUser);
+
+                PlayerController manualPlayerController = new ManualPlayerController(MAX_LONG_SECRET_CODE, io);
+
+                Combination guess = manualPlayerController.generateColorCombination();
 
                 CombinationGuess combinationGuess = secret.verifySecretCode(guess);
                 isWinner = combinationGuess.isWinner();
@@ -63,8 +60,8 @@ public class MasterMind {
             } while ((i <= ATTEMPT) && !isWinner);
         } else { //demo
 
-            do {
-                guess = randomColorCombination.generateColorCombination();
+           /* do {
+                guess = manualPlayerController.generateColorCombination();
 
                 String codeUser = io.readString(Message.ATTEMPT.getMessage());
                 io.writeln(codeUser);
@@ -73,7 +70,7 @@ public class MasterMind {
                 isWinner = combinationGuess.isWinner();
 
                 ++i;
-            } while ((i <= ATTEMPT) && !isWinner);
+            } while ((i <= ATTEMPT) && !isWinner);*/
 
         }
 
