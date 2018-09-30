@@ -17,11 +17,24 @@ public class MasterMind {
     static final int NUMBER_PLAY_MODE = 2;
 
     public static void main(String[] args) {
-
         IO io = new IO();
-        RandomColorCombination randomColorCombination = new RandomColorCombination(MAX_LONG_SECRET_CODE);
 
-        Combination secret = randomColorCombination.generateCombinationColor();
+        io.writeln(Message.WELCOME.getMessage());
+        io.writeln(Message.GAME_USER.getMessage());
+        io.writeln(Message.GAME_MACHINE.getMessage());
+
+        int option;
+        boolean ok;
+
+        do {
+            option = io.readInt(Message.GAME_OPTION.getMessage());
+            ok = (option > 0) && (option <= NUMBER_PLAY_MODE);
+
+            if (!ok) {
+                io.writeln(Message.GAME_OPTION_ERROR.getMessage());
+            }
+        } while (!ok);
+
         List<SecretColor> colors = new ArrayList<>();
         colors.add(SecretColor.BLUE);
         colors.add(SecretColor.BLUE);
@@ -30,28 +43,39 @@ public class MasterMind {
 
         Combination guess = new Combination(MAX_LONG_SECRET_CODE, colors);
 
-        io.writeln(Message.WELCOME.toString());
-        io.writeln(Message.GAME_USER.getMessage());
-        io.writeln(Message.GAME_MACHINE.getMessage());
-
-        int option;
-        do{
-            io.writeln(Message.GAME_OPTION_ERROR.getMessage());
-            option = io.readInt(Message.GAME_OPTION.getMessage());
-
-        }while(!(option > 0 && option <= NUMBER_PLAY_MODE));
+        RandomColorCombination randomColorCombination = new RandomColorCombination(MAX_LONG_SECRET_CODE);
+        Combination secret = randomColorCombination.generateCombinationColor();
 
         int i = 1;
-        boolean isWinner;
+        boolean isWinner = false;
 
-        do {
-            String codeUser = io.readString(Message.ATTEMPT.getMessage());
-            io.writeln(codeUser);
+        if (option == 1) { // partida
+            io.writeln("Secreto: ****");
 
-            CombinationGuess combinationGuess = secret.verifySecretCode(guess);
-            isWinner = combinationGuess.isWinner();
+            do {
+                String codeUser = io.readString(Message.ATTEMPT.getMessage());
+                io.writeln(codeUser);
 
-            ++i;
-        } while ((i <= ATTEMPT) && !isWinner);
+                CombinationGuess combinationGuess = secret.verifySecretCode(guess);
+                isWinner = combinationGuess.isWinner();
+
+                ++i;
+            } while ((i <= ATTEMPT) && !isWinner);
+        } else { //demo
+
+            do {
+                guess = randomColorCombination.generateCombinationColor();
+
+                String codeUser = io.readString(Message.ATTEMPT.getMessage());
+                io.writeln(codeUser);
+
+                CombinationGuess combinationGuess = secret.verifySecretCode(guess);
+                isWinner = combinationGuess.isWinner();
+
+                ++i;
+            } while ((i <= ATTEMPT) && !isWinner);
+
+        }
+
     }
 }

@@ -11,7 +11,7 @@ public abstract class ColorCombinationController {
         this.dimension = dimension;
     }
 
-    public abstract Combination generateCombinationColor();
+    public abstract Combination generateColorCombination();
 
     public int getDimension() {
         return dimension;
