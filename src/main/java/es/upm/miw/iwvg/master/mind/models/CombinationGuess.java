@@ -7,15 +7,17 @@ import java.util.List;
 
 public class CombinationGuess {
     private List<Color> colorList = new ArrayList<>();
-
     private int dimension;
+    private int killed;
+    private int injured;
 
     public CombinationGuess(int dimension, List<Color> colorList) {
         assert dimension > 0;
-        assert !colorList.isEmpty();
 
         this.dimension = dimension;
         this.colorList = new ArrayList<>(colorList);
+        this.killed = 0;
+        this.injured = 0;
     }
 
     public List<Color> getColorList() {
@@ -26,19 +28,34 @@ public class CombinationGuess {
         this.colorList = colorList;
     }
 
-    public boolean isWinner(){
+    public boolean isWinner() {
         int i = 0;
 
-        while(this.getColorList().get(i).equals(Color.BLACK) && i < this.getDimension()){
+        while (this.getColorList().get(i).equals(Color.BLACK) && i < this.getDimension()) {
             i++;
         }
 
         return i == this.getDimension();
-
     }
 
     public int getDimension() {
         return dimension;
+    }
+
+    public int getKilled() {
+        return killed;
+    }
+
+    public void setKilled(int killed) {
+        this.killed = killed;
+    }
+
+    public int getInjured() {
+        return injured;
+    }
+
+    public void setInjured(int injured) {
+        this.injured = injured;
     }
 
     @Override

@@ -16,12 +16,10 @@ public class RandomSecretColorCombination extends ColorCombinationController {
     public Combination generateCombinationColor() {
         List<SecretColor> colorList = new ArrayList<>();
 
-        for (int i = 0; i < this.getDimesion(); i++) {
+        for (int i = 0; i < this.getDimension(); i++) {
             colorList.add(SecretColor.random());
         }
 
-        Combination combination = new Combination(this.getDimesion(), colorList);
-
-        return combination;
+        return new Combination(this.getDimension(), colorList);
     }
 }

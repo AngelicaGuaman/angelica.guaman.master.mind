@@ -6,14 +6,14 @@ public abstract class ColorCombinationController {
 
     private int dimension;
 
-    public ColorCombinationController(int dimesion){
-        assert dimesion > 0;
-        this.dimension = dimesion;
+    public ColorCombinationController(int dimension){
+        assert dimension > 0;
+        this.dimension = dimension;
     }
 
     public abstract Combination generateCombinationColor();
 
-    public int getDimesion() {
+    public int getDimension() {
         return dimension;
     }
 }

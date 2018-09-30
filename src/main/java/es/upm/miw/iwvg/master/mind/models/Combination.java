@@ -12,7 +12,6 @@ public class Combination {
 
     public Combination(int dimension, List<SecretColor> colorList) {
         assert dimension > 0;
-        assert !colorList.isEmpty();
 
         this.dimension = dimension;
         this.colorList = new ArrayList<>(colorList);
@@ -32,13 +31,16 @@ public class Combination {
 
     public CombinationGuess verifySecretCode(Combination guess) {
         List<Color> colorList = new ArrayList<>();
+        CombinationGuess combinationGuess = new CombinationGuess(this.getDimension(), colorList);
 
-        for(int i = 0; i < this.getDimension(); i++){
-            if(guess.getColorList().get(i).getValue() == this.getColorList().get(i).getValue()){
+        for (int i = 0; i < this.getDimension(); i++) {
+            if (guess.getColorList().get(i).getValue() == this.getColorList().get(i).getValue()) {
                 colorList.add(Color.BLACK);
-            } else if(this.getColorList().contains(guess.getColorList().get(i))){
+                combinationGuess.setKilled(combinationGuess.getKilled() + 1);
+            } else if (this.getColorList().contains(guess.getColorList().get(i))) {
                 colorList.add(Color.WHITE);
-            } else{
+                combinationGuess.setInjured(combinationGuess.getInjured() + 1);
+            } else {
                 colorList.add(Color.EMPTY);
             }
         }
