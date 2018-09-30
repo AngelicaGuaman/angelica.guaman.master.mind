@@ -19,6 +19,4 @@ public class Board {
         this.combinationGuess = this.getSecretCode().verifySecretCode(combination);
         return this.combinationGuess.isWinner();
     }
-
-
 }

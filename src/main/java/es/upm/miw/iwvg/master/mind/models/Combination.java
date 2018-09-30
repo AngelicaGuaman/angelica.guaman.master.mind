@@ -34,18 +34,21 @@ public class Combination {
         CombinationGuess combinationGuess = new CombinationGuess(this.getDimension(), colorList);
 
         for (int i = 0; i < this.getDimension(); i++) {
-            if (guess.getColorList().get(i).getValue() == this.getColorList().get(i).getValue()) {
-                colorList.add(Color.BLACK);
-                combinationGuess.setKilled(combinationGuess.getKilled() + 1);
-            } else if (this.getColorList().contains(guess.getColorList().get(i))) {
-                colorList.add(Color.WHITE);
-                combinationGuess.setInjured(combinationGuess.getInjured() + 1);
+            if (guess.getColorList().contains(this.getColorList().get(i))) {
+                if (guess.getColorList().get(i).equals(this.getColorList().get(i))) {
+                    colorList.add(Color.BLACK);
+                    combinationGuess.setKilled(combinationGuess.getKilled() + 1);
+                } else {
+                    colorList.add(Color.WHITE);
+                    combinationGuess.setInjured(combinationGuess.getInjured() + 1);
+                }
             } else {
                 colorList.add(Color.EMPTY);
             }
         }
 
-        return new CombinationGuess(this.getDimension(), colorList);
+        combinationGuess.setColorList(colorList);
+        return combinationGuess;
     }
 
     @Override
