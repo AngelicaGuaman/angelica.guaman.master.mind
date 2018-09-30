@@ -8,9 +8,9 @@ import es.upm.miw.iwvg.master.mind.utils.SecretColor;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RandomColorCombination extends ColorCombinationController {
+public class RandomColorCombinationController extends ColorCombinationController {
 
-    public RandomColorCombination(int dimension, IO io){
+    public RandomColorCombinationController(int dimension, IO io){
         super(dimension, io);
     }
 
