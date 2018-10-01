@@ -13,16 +13,6 @@ public class ManualContinueController extends ContinueController {
 
     @Override
     public boolean continuePlaying() {
-        boolean playing;
-
-        do {
-            playing = yesNoDialog.read();
-
-            if (!playing) {
-                this.getIo().writeln(Message.GAME_OPTION_ERROR.getMessage());
-            }
-        } while (!playing);
-
-        return playing;
+        return  yesNoDialog.read();
     }
 }
