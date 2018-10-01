@@ -2,7 +2,6 @@ package es.upm.miw.iwvg.master.mind.views;
 
 import es.upm.miw.iwvg.master.mind.utils.IO;
 import es.upm.miw.iwvg.master.mind.utils.SecretColor;
-import sun.swing.SwingUtilities2;
 
 import java.util.List;
 

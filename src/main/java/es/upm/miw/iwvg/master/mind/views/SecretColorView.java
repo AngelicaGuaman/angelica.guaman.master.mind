@@ -4,7 +4,7 @@ import es.upm.miw.iwvg.master.mind.utils.IO;
 import es.upm.miw.iwvg.master.mind.utils.SecretColor;
 
 public class SecretColorView {
-    private static final char[] COLORS = { 'Z', 'V', 'R', 'Y'};
+    private static final char[] COLORS = { 'A', 'R', 'V', 'Z'};
 
     private SecretColor secretColor;
 

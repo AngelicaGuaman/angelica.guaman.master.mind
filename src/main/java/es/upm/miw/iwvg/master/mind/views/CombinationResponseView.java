@@ -5,13 +5,13 @@ import es.upm.miw.iwvg.master.mind.utils.IO;
 
 import java.util.List;
 
-public class CombinationGuessView {
+public class CombinationResponseView {
 
     private List<ColorResponse> colorResponseList;
 
     private IO io;
 
-    public CombinationGuessView(List<ColorResponse> secretColorResponseList) {
+    public CombinationResponseView(List<ColorResponse> secretColorResponseList) {
         this.colorResponseList = secretColorResponseList;
         io = new IO();
     }

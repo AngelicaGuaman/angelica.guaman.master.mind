@@ -3,7 +3,7 @@ package es.upm.miw.iwvg.master.mind.views;
 import es.upm.miw.iwvg.master.mind.utils.ColorResponse;
 import es.upm.miw.iwvg.master.mind.utils.IO;
 
-public class ColorView {
+public class ColorResponseView {
 
     private static final char[] COLORS = { 'B', 'N', '-'};
 
@@ -11,7 +11,7 @@ public class ColorView {
 
     private IO io;
 
-    public ColorView(ColorResponse colorResponse) {
+    public ColorResponseView(ColorResponse colorResponse) {
         this.colorResponse = colorResponse;
         io = new IO();
     }

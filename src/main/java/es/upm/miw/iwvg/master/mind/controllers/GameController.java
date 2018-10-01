@@ -44,14 +44,13 @@ public class GameController {
 
         io.writeln("\nSecreto: ****");
         Combination secret = players[0].generateColorCombination();
-        //io.writeln(Message.ATTEMPT.getMessage()+combination.toString());
 
         do {
             Combination guess = players[1].generateColorCombination();
 
             CombinationResponse combinationResponse = secret.verifySecretCode(guess);
             isWinner = combinationResponse.isWinner();
-            io.writeln("Código muerto/herido [N-negro, B-blanco]: " + combinationResponse.toString());
+            io.writeln(Message.KILLED_INJURED.getMessage() + combinationResponse.toString());
 
             if (!isWinner) {
                 i++;
@@ -64,6 +63,7 @@ public class GameController {
         if ((i - 1) == ATTEMPT) {
             io.writeln();
             io.writeln(Message.AVAILABLE_ATTEMPT.getMessage());
+            io.writeln(Message.LOSE.getMessage());
             io.writeln("El código secreto era: " + secret.toString());
         }
     }
