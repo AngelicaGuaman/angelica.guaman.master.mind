@@ -1,28 +1,31 @@
 package es.upm.miw.iwvg.master.mind.views;
 
+import es.upm.miw.iwvg.master.mind.models.Combination;
 import es.upm.miw.iwvg.master.mind.utils.IO;
 import es.upm.miw.iwvg.master.mind.utils.SecretColor;
 
-import java.util.List;
-
 public class CombinationView {
 
-    private List<SecretColor> secretColorList;
+    private Combination combination;
 
     private IO io;
 
-    public CombinationView(List<SecretColor> secretColorList) {
-        this.secretColorList = secretColorList;
+    public CombinationView(Combination combination) {
+        this.combination = combination;
         io = new IO();
     }
 
     void write(String title) {
         String result = "";
 
-        for(SecretColor secretColor : secretColorList){
+        for (SecretColor secretColor : combination.getColorList()) {
             result += secretColor.getValue();
         }
 
-        io.writeln(result);
+        io.writeln(title + result);
+    }
+
+    void read(String title) {
+        io.readString(title);
     }
 }

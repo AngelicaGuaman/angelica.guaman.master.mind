@@ -10,7 +10,7 @@ public class LocalLogic implements Logic {
     private MenuController menuController;
 
     public LocalLogic(){
-        game = new Game(4);
+        game = new Game();
         menuController = new MenuController();
     }
 

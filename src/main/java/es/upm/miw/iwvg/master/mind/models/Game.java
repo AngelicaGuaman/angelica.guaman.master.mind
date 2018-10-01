@@ -5,15 +5,16 @@ import es.upm.miw.iwvg.master.mind.utils.State;
 
 public class Game {
 
+    private static final int MAX_LONG_SECRET_CODE = 4;
+
     private State state;
 
     private GameController gameController;
 
-    public Game(int dimension) {
-        assert dimension > 0;
+    public Game() {
 
         this.state = State.INITIAL;
-        gameController = new GameController(dimension);
+        gameController = new GameController(MAX_LONG_SECRET_CODE);
 
     }
 

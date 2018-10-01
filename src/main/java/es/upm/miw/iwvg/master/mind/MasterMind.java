@@ -2,14 +2,11 @@ package es.upm.miw.iwvg.master.mind;
 
 import es.upm.miw.iwvg.master.mind.controllers.OperationController;
 import es.upm.miw.iwvg.master.mind.models.Game;
-import es.upm.miw.iwvg.master.mind.utils.IO;
 
 public class MasterMind {
 
     private Logic logic;
     private View view;
-
-    private static final int MAX_LONG_SECRET_CODE = 4;
 
     public MasterMind(View view, Logic logic){
         assert logic != null;
@@ -20,7 +17,7 @@ public class MasterMind {
     }
 
     public static void main(String[] args) {
-        Game game = new Game(MAX_LONG_SECRET_CODE);
+        Game game = new Game();
 
         game.play();
     }

@@ -8,10 +8,16 @@ import es.upm.miw.iwvg.master.mind.controllers.OperationController;
 
 public class ConsoleView implements View {
 
+    private MenuView menuView;
+
     private GameView gameView;
 
+    private ContinueView continueView;
+
     public ConsoleView() {
+        menuView = new MenuView();
         gameView = new GameView();
+        continueView = new ContinueView();
     }
 
     public void interact(OperationController operationController) {
@@ -31,6 +37,6 @@ public class ConsoleView implements View {
 
     @Override
     public void visit(ContinueController continueController) {
-
+        continueView.interact(continueController);
     }
 }
